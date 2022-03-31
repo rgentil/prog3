@@ -1,4 +1,4 @@
-package Resolucion;
+package objetos;
 /*
 Ejercicio 1.
 Implemente los métodos indicados del esqueleto de Lista desarrollado en Teoría

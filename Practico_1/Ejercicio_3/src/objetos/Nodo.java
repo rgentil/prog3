@@ -1,4 +1,4 @@
-package Resolucion;
+package objetos;
 public class Nodo<T> {
 	
 	private T info;

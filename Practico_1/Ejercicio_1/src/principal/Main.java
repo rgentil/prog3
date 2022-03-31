@@ -1,6 +1,6 @@
 package principal;
 
-import Resolucion.ListaSimple;
+import resolucion.ListaSimple;
 
 public class Main {
 /*
