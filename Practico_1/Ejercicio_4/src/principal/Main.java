@@ -37,8 +37,7 @@ indexOf, que reciba un elemento y retorne el índice donde está almacenado ese 
 		System.out.println("El elemento 444 está en la posición : " + lista.indexOf(444));
 		
 		System.out.println("El elemento 555 está en la posición : " + lista.indexOf(555));
-		
-		
+				
 	}
 
 }

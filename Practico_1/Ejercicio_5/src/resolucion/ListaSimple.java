@@ -6,6 +6,8 @@ indexOf, que reciba un elemento y retorne el índice donde está almacenado ese 
 -1 si el elemento no existe en la lista.
 */
 
+import iterador.IteradorLista;
+
 public class ListaSimple<T> {
 	private Nodo<T> first;
 	private int size;
@@ -68,5 +70,9 @@ public class ListaSimple<T> {
 		}		
 		return -1;
 	}
+	
+    public IteradorLista getIterador(){
+        return new IteradorLista(this); 
+    }
     
 }
