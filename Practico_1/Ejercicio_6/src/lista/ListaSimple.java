@@ -1,10 +1,4 @@
-package resolucion;
-/*
-Ejercicio 4.
-A la implementación de la clase Lista realizada en el ejercicio 1, agregue un método
-indexOf, que reciba un elemento y retorne el índice donde está almacenado ese elemento, o
--1 si el elemento no existe en la lista.
-*/
+package lista;
 
 import iterador.IteradorLista;
 import iterador.IteratorList;
@@ -23,6 +17,15 @@ public class ListaSimple<T> {
 		tmp.setNext(this.first);
 		this.first = tmp;
 		size++;
+	}
+	
+	public void insertOrdenado(T info) {
+		if(isEmpty()) {
+			this.insertFront(info);
+		}else {
+			//pepe
+		}
+		
 	}
 	
 	public T extractFront() {
