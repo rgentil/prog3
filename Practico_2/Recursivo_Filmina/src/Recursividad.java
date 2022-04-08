@@ -49,7 +49,7 @@ public class Recursividad {
 	}
 	
 	public boolean arregloOrdenado(int[] arr, int x) {
-		if (arr.length <= 1 || arr.length <= x+1) {//Condición de corte
+		if (arr == null || arr.length <= 1 || arr.length <= x+1) {//Condición de corte
 			return true;
 		}
 		if (arr[x] > arr[x+1]) {//Condición de corte

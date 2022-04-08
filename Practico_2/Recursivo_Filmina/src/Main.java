@@ -33,7 +33,7 @@ public class Main {
 			3. ¿Qué cambiaría si la estructura fuera una lista en lugar de un arreglo? Nada.
 
 		*/
-		int[] arrOrdenado = {1,2,5,8,9};
+		int[] arrOrdenado = {1,3,4,6,7,8};
 		int[] arrDesordenado= {1,2,9,5,8,9};
 		System.out.println("El arreglo esta ordenado? " + recursividad.arregloOrdenado(arrOrdenado,0));
 		
