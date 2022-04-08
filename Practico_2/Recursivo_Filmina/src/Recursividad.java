@@ -48,7 +48,11 @@ public class Recursividad {
 		}
 	}
 	
-	public boolean arregloOrdenado(int[] arr, int x) {
+	public boolean arregloOrdenado(int[] arr) {
+		return this.arregloOrdenado(arr, 0);
+	}
+	
+	private boolean arregloOrdenado(int[] arr, int x) {
 		if (arr == null || arr.length <= 1 || arr.length <= x+1) {//Condición de corte
 			return true;
 		}
