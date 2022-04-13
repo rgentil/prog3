@@ -22,7 +22,7 @@ public class IteratorList implements Iterator<Object>{
 	@Override
 	public Object next() {
 		Object valor = null;
-	    if(pos <= lista.size()){
+	    if(this.hasNext()){
 	    	valor = lista.get(pos);	
 	        pos ++;
 	    }

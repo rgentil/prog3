@@ -8,8 +8,8 @@ import iterador.IteradorLista;
 Ejercicio 6.
 	Escriba un procedimiento que dadas dos listas construya otra con los elementos comunes,
 	suponiendo que: 
-	a) Las listas estÃ¡n desordenadas y la lista resultante debe quedar ordenada. 
-	b) Las listas estÃ¡n ordenadas y la lista resultante debe mantenerse ordenada.
+	a) Las listas están desordenadas y la lista resultante debe quedar ordenada. 
+	b) Las listas están ordenadas y la lista resultante debe mantenerse ordenada.
 */
 public class UtilList {
 	

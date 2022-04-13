@@ -42,7 +42,7 @@ public class ListaSimple<T> {
 		return size == 0;
 	}
 	
-	public T get(int index) {
+	public T get(int index) {//O(n)
 		if (isEmpty() || size() < index) {
 			return null;
 		}
@@ -53,7 +53,7 @@ public class ListaSimple<T> {
 		return tmp.getInfo();
 	}
 	
-	public int size() {
+	public int size() {//O(1)
 		return this.size;
 	}
 	
@@ -66,7 +66,7 @@ public class ListaSimple<T> {
 		return result;
 	}
 	
-	public int indexOf(T elemento) {
+	public int indexOf(T elemento) { //O(n)  retorna la posicion en donde esta el elemento. -1 si no lo encuentra. Puedo usar get(int i)
 		for (int i = 1; i <= size(); i++) {
 			if (this.get(i).equals(elemento)) {
 				return i;

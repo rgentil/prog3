@@ -6,8 +6,8 @@ import util.UtilList;
 Ejercicio 6.
 	Escriba un procedimiento que dadas dos listas construya otra con los elementos comunes,
 	suponiendo que: 
-	a) Las listas estÃ¡n desordenadas y la lista resultante debe quedar ordenada. 
-	b) Las listas estÃ¡n ordenadas y la lista resultante debe mantenerse ordenada.
+	a) Las listas están desordenadas y la lista resultante debe quedar ordenada. 
+	b) Las listas están ordenadas y la lista resultante debe mantenerse ordenada.
 */
 public class Main {
 
@@ -32,7 +32,7 @@ public class Main {
 
 		UtilList util = new UtilList(lista1, lista2);
 		ListaSimple<Object> union = util.union();
-		System.out.println("UniÃ³n " + union);
+		System.out.println("Unión " + union);
 
 	}
 

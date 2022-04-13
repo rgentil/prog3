@@ -5,10 +5,11 @@ import resolucion.ListaSimple;
 public class IteradorLista implements Iterador{
 
 	private ListaSimple<?> lista;
-    private int posicion_actual = 1;
+    private int posicion_actual;
 	
     public IteradorLista(ListaSimple<?> lista) {
     	this.lista = lista;
+    	posicion_actual = 1;
     }
     
 	@Override
@@ -24,7 +25,7 @@ public class IteradorLista implements Iterador{
 	@Override
 	public Object getNext() {
 		Object valor = null;
-        if(posicion_actual <= lista.size()){
+        if(this.hasMore()){
         	valor = lista.get(posicion_actual);
             posicion_actual ++;
         }
@@ -39,7 +40,7 @@ public class IteradorLista implements Iterador{
 	@Override
 	public Object actual() {
 		Object valor = null;
-		if(posicion_actual <= lista.size()){
+		if(hasMore()){
 			valor = lista.get(posicion_actual);
         }
         return valor;

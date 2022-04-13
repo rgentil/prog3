@@ -38,6 +38,14 @@ public class Main {
 		System.out.println("El arreglo esta ordenado? " + recursividad.arregloOrdenado(arrOrdenado));
 		
 		System.out.println("El arreglo esta ordenado? " + recursividad.arregloOrdenado(arrDesordenado));
+		
+		System.out.println("Transformacion a binario");
+		recursividad.transformarABinario(150);
+		System.out.println("");
+		
+		int[] arr2= {0,1,2,3,4,2,1,0};
+		System.out.println("El arreglo es capicua? " + recursividad.arregloCapicua(arr2));
+		
 	}
 
 }
