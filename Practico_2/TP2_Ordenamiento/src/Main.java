@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -45,6 +47,18 @@ public class Main {
 		for (int i = 0; i < aOrdenado2.length; i++) {
 			System.out.print(aOrdenado2[i] + " ");
 		} 	
+		
+		System.out.println("");
+		System.out.println("------------------------------------------------------------------");
+
+		//Orden por quicksort		
+		System.out.println("Orden por quicksort ");
+		int[] arreglo3 = {2,1,8,3,9,2,1,2};
+		System.out.print( Arrays.toString(arreglo3));
+		
+		System.out.println("");
+		int[] aOrdenado3 = orden.quicksort(arreglo3);
+		System.out.print(Arrays.toString(aOrdenado3));
 		
 		
 	}

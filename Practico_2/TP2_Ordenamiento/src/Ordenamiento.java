@@ -77,8 +77,8 @@ public class Ordenamiento {
 	/*
 	El método ordena un array a de enteros desde la posición izq hasta la posición der. 
 	En la primera llamada al método recibirá los valores izq = 0, der = ELEMENTOS-1. 
-	Primero se calcula el elemento central m. A continuación la primera parte del array, 
-	desde izq hasta m y la segunda parte del array, desde m+1 hasta der, 
+	Primero se calcula el elemento central medio. A continuación la primera parte del array, 
+	desde izq hasta medio y la segunda parte del array, desde medio+1 hasta der, 
 	se mezclan mediante llamadas recursivas al método mergesort. 
 	La recursión termina cuando izq == der, es decir, cuando un subarray contiene solamente un elemento. 
 	La operación principal de mezcla la realiza el método merge. 
@@ -97,17 +97,93 @@ public class Ordenamiento {
 
 		while (i <= medio && j <= der) { // copia el siguiente elemento más grande
 			if (b[i] <= b[j]) {
-				a[k++] = b[i++];
+				a[k] = b[i];
+				i++;
 			}
 			else {
-				a[k++] = b[j++];
+				a[k] = b[j];
+				j++;
 			}
+			k++;
 		}
 
 		while (i <= medio) { // copia los elementos que quedan de la
-			a[k++] = b[i++]; // primera mitad (si los hay)
+			a[k] = b[i]; // primera mitad (si los hay)
+			k++;
+			i++;
 		}
+		while (j <= der) {
+			a[k] = b[j];
+			k++;
+			j++;
+		}
+		
 		return a;
+	}
+	
+	/*
+	Quicksort
+		
+		Es el algoritmo de ordenación más rápido.
+		Se basa en la técnica divide y vencerás, que consiste en ir subdividiendo el array en arrays más pequeños, y ordenar éstos. 
+		Para hacer esta división, se toma un valor del array como pivote, y se mueven todos los elementos menores que este pivote a su izquierda,
+		y los mayores a su derecha. 
+		A continuación se aplica el mismo método a cada una de las dos partes en las que queda dividido el array.
+		Después de elegir el pivote se realizan dos búsquedas:
+			Una de izquierda a derecha, buscando un elemento mayor que el pivote
+			Otra de derecha a izquierda, buscando un elemento menor que el pivote.
+			Cuando se han encontrado los dos elementos anteriores, se intercambian, y se sigue realizando la búsqueda hasta que las dos búsquedas 
+			se encuentran.
+		Suponiendo que tomamos como pivote el primer elemento, el método Quicksort que implementa este algoritmo de ordenación para ordenar 
+		un array de enteros se presenta a continuación. 
+		
+		Los parámetros izq y der son el primer y último elemento del array a tratar en cada momento.
+		El método ordena un array A de enteros desde la posición izq hasta la posición der. 
+		
+		En la primera llamada recibirá los valores izq = 0, der = ELEMENTOS-1.
+		
+		En el peor caso, cuando el pivote es el elemento menor del array el tiempo de ejecución del método Quicksort es O(n2).
+		En general el tiempo medio de ejecución del Quicksort es O(n log n).
+		
+		No requiere memoria adicional
+		
+	*/
+	
+	public int[] quicksort(int a[]) {
+		return this.quicksort(a, 0, a.length-1);
+	}
+	
+	private int[] quicksort(int A[], int izq, int der) {
+		int pivote = A[izq]; // tomamos primer elemento como pivote
+		int i = izq; // i realiza la búsqueda de izquierda a derecha
+		int j = der; // j realiza la búsqueda de derecha a izquierda
+		int aux;
+
+		while (i < j) { // mientras no se crucen las búsquedas
+			while (A[i] <= pivote && i < j) {
+				i++; // busca elemento mayor que pivote
+			}
+			while (A[j] > pivote) {
+				j--; // busca elemento menor que pivote
+			}
+			if (i < j) { // si no se han cruzado
+				aux = A[i]; // los intercambia
+				A[i] = A[j];
+				A[j] = aux;
+			}
+		}
+
+		A[izq] = A[j]; // se coloca el pivote en su lugar de forma que tendremos
+		A[j] = pivote; // los menores a su izquierda y los mayores a su derecha
+
+		if (izq < j - 1) {
+			return quicksort(A, izq, j - 1); // ordenamos subarray izquierdo
+		}
+		if (j + 1 < der) {
+			return quicksort(A, j + 1, der); // ordenamos subarray derecho
+		}
+		return A;
+
 	}
 
 }
