@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Ordenamiento {
 
@@ -80,7 +81,7 @@ public class Ordenamiento {
 	La recursión termina cuando izq == der, es decir, cuando un subarray contiene solamente un elemento. 
 	La operación principal de mezcla la realiza el método merge. 
 	*/
-	// Tiempo de ejecución O(n log2n)
+	// Tiempo de ejecución O(n log n)
 	private static void merge(int a[], int izq, int medio, int der) {
 		int i, j, k;
 		int[] b = new int[a.length]; // array auxiliar
@@ -180,6 +181,15 @@ public class Ordenamiento {
 		}
 		
 
+	}
+	
+//	 The sorting algorithm is a Dual-Pivot Quicksort
+//    * by Vladimir Yaroslavskiy, Jon Bentley, and Joshua Bloch. This algorithm
+//    * offers O(n log(n)) performance on all data sets, and is typically
+//    * faster than traditional (one-pivot) Quicksort implementations
+
+	public static void ArraysSort(int[] a) {
+		Arrays.sort(a);
 	}
 
 }

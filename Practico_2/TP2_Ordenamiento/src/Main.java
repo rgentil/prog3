@@ -46,6 +46,61 @@ public class Main {
 		System.out.println("");
 		Ordenamiento.quicksort(arreglo3);
 		System.out.print(Arrays.toString(arreglo3));
+		
+//		Ejercicio 6.
+//			Implemente una función que cree un arreglo de tamaño N con números aleatorios. Corra los
+//			algoritmos de los ejercicios 3 y 4, 10000 veces consecutivas cada uno, y compruebe el tiempo
+//			de ejecución. Haga lo mismo con el método Arrays.sort(...) de Java, y compare los tiempos
+//			obtenidos. Investigue cómo está implementado el Array.sort()
+
+		
+		for(int j = 0; j <9999; j++) {
+			int N = 50;
+			int[] a = new int[N];
+			for(int i = 0; i <N; i++) {
+				int randomValue = (int) (Math.random()*2000);
+				a[i] = randomValue;
+			}
+			System.out.println("Arreglo N Orden por mersort ");
+			System.out.print("Original " + Arrays.toString(a));		
+			System.out.println("");
+			Ordenamiento.mergesort(a);
+			System.out.print("Ordenado " + Arrays.toString(a));			
+			System.out.println("");
+			System.out.println("------------------------------------------------------------------");			
+		}
+		
+		for(int j = 0; j <9999; j++) {
+			int N = 50;
+			int[] a = new int[N];
+			for(int i = 0; i <N; i++) {
+				int randomValue = (int) (Math.random()*1000);
+				a[i] = randomValue;
+			}
+			System.out.println("Arreglo N Orden por quicksort ");
+			System.out.print("Original " + Arrays.toString(a));		
+			System.out.println("");
+			Ordenamiento.quicksort(a);
+			System.out.print("Ordenado " + Arrays.toString(a));			
+			System.out.println("");
+			System.out.println("------------------------------------------------------------------");			
+		}
+		
+		for(int j = 0; j <9999; j++) {
+			int N = 50;
+			int[] a = new int[N];
+			for(int i = 0; i <N; i++) {
+				int randomValue = (int) (Math.random()*1000);
+				a[i] = randomValue;
+			}
+			System.out.println("Arreglo N Orden por Arrays.sort ");
+			System.out.print("Original " + Arrays.toString(a));		
+			System.out.println("");
+			Ordenamiento.ArraysSort(a);
+			System.out.print("Ordenado " + Arrays.toString(a));			
+			System.out.println("");
+			System.out.println("------------------------------------------------------------------");			
+		}
 				
 	}
 
