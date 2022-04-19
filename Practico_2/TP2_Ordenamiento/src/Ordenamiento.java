@@ -1,8 +1,8 @@
 
 public class Ordenamiento {
 
-	public Ordenamiento() {
-	}
+	//public Ordenamiento() {
+	//}
 
 	/*
 	 * El método de ordenación por selección consiste en repetir los siguientes
@@ -13,7 +13,7 @@ public class Ordenamiento {
 	 */
 
 	// Tiempo de ejecución O(n2)
-	public int[] seleccion(int a[]) {
+	public static void seleccion(int a[]) {
 		for (int i = 0; i < a.length - 1; i++) { // Voy a recorrer todo el arreglo
 			int menor = a[i]; // Tomo como menor el primero y guardo el valor y la posicion en el que esta
 			int pos_menor = i;
@@ -30,7 +30,6 @@ public class Ordenamiento {
 				}
 			}
 		}
-		return a;
 	}
 
 	/*
@@ -39,7 +38,7 @@ public class Ordenamiento {
 	 * mayor sube como una burbuja hacia la posición más alta.
 	 */
 	// Tiempo de ejecución O(n2)
-	public int[] burbujeo(int a[]) {
+	public static void burbujeo(int a[]) {
 		for (int i = 0; i < a.length - 1; i++) {
 			for (int y = i + 1; y < a.length; y++) {
 				if (a[i] > a[y]) {
@@ -49,7 +48,6 @@ public class Ordenamiento {
 				}
 			}
 		}
-		return a;
 	}
 
 	/*
@@ -60,18 +58,17 @@ public class Ordenamiento {
 	 * ordenadas se mezclan formando una secuencia ordenada.
 	 */
 	
-	public int[] mergesort(int a[]) {
-		return this.mergesort(a, 0, a.length-1);
+	public static void mergesort(int a[]) {
+		mergesort(a, 0, a.length-1);
 	}
 	
-	public int[] mergesort(int a[], int izq, int der) {
+	private static void mergesort(int a[], int izq, int der) {
 		if (izq < der) {
 			int medio = (izq + der) / 2;
 			mergesort(a, izq, medio);
 			mergesort(a, medio + 1, der);
-			return merge(a, izq, medio, der);
+			merge(a, izq, medio, der);
 		}
-		return null;
 	}
 
 	/*
@@ -84,7 +81,7 @@ public class Ordenamiento {
 	La operación principal de mezcla la realiza el método merge. 
 	*/
 	// Tiempo de ejecución O(n log2n)
-	private int[] merge(int a[], int izq, int medio, int der) {
+	private static void merge(int a[], int izq, int medio, int der) {
 		int i, j, k;
 		int[] b = new int[a.length]; // array auxiliar
 		for (i = izq; i <= der; i++) { // copia ambas mitades en el array auxiliar
@@ -118,7 +115,6 @@ public class Ordenamiento {
 			j++;
 		}
 		
-		return a;
 	}
 	
 	/*
@@ -149,11 +145,11 @@ public class Ordenamiento {
 		
 	*/
 	
-	public int[] quicksort(int a[]) {
-		return this.quicksort(a, 0, a.length-1);
+	public static void quicksort(int a[]) {
+		quicksort(a, 0, a.length-1);
 	}
 	
-	private int[] quicksort(int A[], int izq, int der) {
+	private static void quicksort(int A[], int izq, int der) {
 		int pivote = A[izq]; // tomamos primer elemento como pivote
 		int i = izq; // i realiza la búsqueda de izquierda a derecha
 		int j = der; // j realiza la búsqueda de derecha a izquierda
@@ -163,7 +159,7 @@ public class Ordenamiento {
 			while (A[i] <= pivote && i < j) {
 				i++; // busca elemento mayor que pivote
 			}
-			while (A[j] > pivote) {
+			while (A[j] > pivote ) {
 				j--; // busca elemento menor que pivote
 			}
 			if (i < j) { // si no se han cruzado
@@ -177,12 +173,12 @@ public class Ordenamiento {
 		A[j] = pivote; // los menores a su izquierda y los mayores a su derecha
 
 		if (izq < j - 1) {
-			return quicksort(A, izq, j - 1); // ordenamos subarray izquierdo
+			quicksort(A, izq, j - 1); // ordenamos subarray izquierdo
 		}
 		if (j + 1 < der) {
-			return quicksort(A, j + 1, der); // ordenamos subarray derecho
+			quicksort(A, j + 1, der); // ordenamos subarray derecho
 		}
-		return A;
+		
 
 	}
 
