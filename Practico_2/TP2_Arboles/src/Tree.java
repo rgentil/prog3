@@ -188,6 +188,7 @@ public class Tree {
 	    }
 	}
 	
+	//Saber el tamanio del arbol sin usar una variable de clase
 	public int sizee() {
 		return sizee(this.raiz);
 	}
@@ -200,6 +201,7 @@ public class Tree {
 		}
 	}
 
+	//Saber el tamanio del arbol sin usando variable de clase auxContador
 	public int size() {
 		setAuxContador(0);
 		size(this.raiz);

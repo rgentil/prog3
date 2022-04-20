@@ -188,7 +188,7 @@ public class Ordenamiento {
 //    * offers O(n log(n)) performance on all data sets, and is typically
 //    * faster than traditional (one-pivot) Quicksort implementations
 
-	public static void ArraysSort(int[] a) {
+	public static void arraysSort(int[] a) {
 		Arrays.sort(a);
 	}
 
