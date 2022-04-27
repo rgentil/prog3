@@ -1,16 +1,17 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 //   Integer getRoot(), O(1)
 //   boolean hasElem(Integer), O (nlog n) 
 //   boolean isEmpty(), O(1) 
 //   void insert(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
-//   --boolean delete(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
+//   boolean delete(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
 //   --int getHeight(), 
 //   void printPosOrder(), 
 //   void printPreOrder(), 
 //   void printInOrder(), 
 //   --List getLongestBranch(), 
-//   --List getFrontera(), 
+//   List getFrontera(), 
 //   Integer getMaxElem(), 
 //   --List getElemAtLevel(int)
 
@@ -20,6 +21,7 @@ public class Tree {
 	
 	private Nodo raiz;
 	private int auxContador;
+	private int altura;
 	
 	public Tree() {
 		this.raiz = null;
@@ -95,39 +97,110 @@ public class Tree {
 	}
 	
 	//Eliminar un elemento
-	/*public boolean delete(Integer valor) {
-		return this.delete (this.raiz, valor);
+	public boolean delete(Integer valor) {
+		if (!this.isEmpty()) {
+			if (this.raiz.getValor() == valor) {//Si lo que voy a eliminar es la raiz
+				return this.delete(this.raiz,valor);
+			}
+			return this.delete(this.raiz,this.raiz, valor);//Si no es la raiz paso un padre y el nodo
+		}
+		return false;
 	}
 	
-	private boolean delete(Nodo nodo, Integer valor) {
+	private boolean delete(Nodo padre, Nodo nodo, Integer valor) {
 		if (nodo == null) {
 			return false;
 		}
-		if (valor > nodo.getValor()) { //Va por izquierda
-			return delete(nodo.getIzquierdo(), valor);
+		if (valor > nodo.getValor()) { //Va por derecha
+			return delete(nodo, nodo.getDerecho(), valor);
 		}else {
 			if (valor < nodo.getValor()) { //Va por izquierda
-				return delete(nodo.getDerecho(), valor);
+				return delete(nodo, nodo.getIzquierdo(), valor);
 			}else {
-				if (nodo.getIzquierdo() == null && nodo.getDerecho() == null) {
+				if (this.esHoja(nodo)) {
 					// es hoja
+					return this.deleteHoja(padre, valor);					
 				}else {
 					if (nodo.getIzquierdo() == null && nodo.getDerecho() != null) {
-					//	uno solo
+						//uno solo hijo derecho
+						return this.deleteNodoDeUnHijo(padre,nodo.getDerecho(),valor);
 					}
 					else {
 						if (nodo.getIzquierdo() != null && nodo.getDerecho() == null) {
-							//uno solo
+							//uno solo hijo izquierdo
+							return this.deleteNodoDeUnHijo(padre,nodo.getIzquierdo(),valor);
 						}else {
-							//complejo
+							//Si no es la raiz
+							if (nodo.getIzquierdo() != null && nodo.getDerecho() != null) {
+								Nodo aux = getNodoMaxElem(nodo.getIzquierdo());//Del izquierdo tomo el mayor
+								delete(aux.getValor()); //Elimino el valor mayor encontrado
+								if (padre.getIzquierdo() != null && padre.getIzquierdo().getValor() == valor) {//Si es el hijo izquierdo el que voy a eliminar
+									aux.setIzquierdo(nodo.getIzquierdo());
+									aux.setDerecho(nodo.getDerecho());
+									padre.setIzquierdo(aux);
+								}
+								
+								if (padre.getDerecho() != null && padre.getDerecho().getValor() == valor) {//Si es el hijo derecho el que voy a eliminar
+									aux.setIzquierdo(nodo.getIzquierdo());
+									aux.setDerecho(nodo.getDerecho());
+									padre.setDerecho(aux);
+								}
+								
+							}
+							return true;
 						}
 					}
 				}
-				
 			}
 		}
 	}
-	*/
+	
+	private boolean deleteNodoDeUnHijo(Nodo padre, Nodo nodo, Integer valor) {
+		if (padre.getIzquierdo() != null && padre.getIzquierdo().getValor() == valor) {//Si es el hijo izquierdo el que voy a eliminar 
+			padre.setIzquierdo(nodo);
+			return true;
+		}
+		if (padre.getDerecho() != null && padre.getDerecho().getValor() == valor) { //Si es el hijo derecho el que voy a eliminar
+			padre.setDerecho(nodo);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean deleteHoja(Nodo padre, Integer valor) {
+		if (padre.getIzquierdo() != null && padre.getIzquierdo().getValor() == valor) { //Si es el hijo izquierdo el que voy a eliminar
+			padre.setIzquierdo(null);
+			return true;
+		}
+		if (padre.getDerecho() != null && padre.getDerecho().getValor() == valor) { //Si es el hijo derecho el que voy a eliminar
+			padre.setDerecho(null);
+			return true;
+		}
+		return false;
+	}
+
+	private boolean delete(Nodo raiz, Integer valor) {
+		if (raiz == null) {
+			return false;
+		}		
+		if (this.esHoja(raiz)) {
+			this.raiz = null;
+		}
+		if (raiz.getIzquierdo() == null && raiz.getDerecho() != null) {
+			this.raiz = raiz.getDerecho();
+		}
+		if (raiz.getIzquierdo() != null && raiz.getDerecho() == null) {
+			this.raiz = raiz.getIzquierdo();
+		}
+		if (raiz.getIzquierdo() != null && raiz.getDerecho() != null) {
+			Nodo aux = getNodoMaxElem(raiz.getIzquierdo());
+			delete(aux.getValor()); //Elimino el valor mayor encontrado
+			aux.setDerecho(raiz.getDerecho());
+			aux.setIzquierdo(raiz.getIzquierdo());
+			this.raiz = aux;			
+		}
+		return false;
+	}
 
 	//Mayor elemento del arbol
 	public Integer getMaxElem() {
@@ -142,6 +215,40 @@ public class Tree {
 			return getMaxElem(n.getDerecho());
 		}
 	}
+	
+	//Mayor Nodo 
+	private Nodo getNodoMaxElem(Nodo n) {
+		if (isEmpty()) return null;
+		if (n == null || n.getDerecho() == null) {
+			return n;
+		}else {
+			return getNodoMaxElem(n.getDerecho());
+		}
+	}
+	
+	//Menor elemento del arbol
+	public Integer getMinElem() {
+		return getMinElem(this.raiz);
+	}
+	
+	private Integer getMinElem(Nodo n) {
+		if (isEmpty()) return -1;
+		if (n.getIzquierdo() == null) {
+			return n.getValor();
+		}else {
+			return getMinElem(n.getIzquierdo());
+		}
+	}
+	
+	//Menor Nodo 
+	/*private Nodo getNodoMinElem(Nodo n) {
+		if (isEmpty()) return null;
+		if (n == null || n.getIzquierdo() == null) {
+			return n;
+		}else {
+			return getNodoMinElem(n.getIzquierdo());
+		}
+	}*/
 	
 	//Imprimi de la forma pre roden
 	public void printPreOrder() {
@@ -228,5 +335,42 @@ public class Tree {
 		this.auxContador = auxContador;
 	}
 	
+	public List<Integer> getFrontera(){
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		return getFrontera(aux,this.raiz);
+	} 
+	
+	private List<Integer> getFrontera(ArrayList<Integer> aux, Nodo n){
+		if (n == null) {
+			return aux;
+		}
+		if (esHoja(n)) {
+			aux.add(n.getValor());
+		}else {
+			getFrontera(aux,n.getIzquierdo());
+			getFrontera(aux,n.getDerecho());
+		}
+		return aux;
+	}
 
+	private boolean esHoja(Nodo n) {
+		return n!=null && n.getIzquierdo() == null && n.getDerecho() == null;
+	}
+
+	public int getHeight() {
+		altura = 0;
+		getHeight(this.raiz,altura);
+		return altura;
+	} 
+	
+	private void getHeight(Nodo n ,int nivel) {
+		if (n != null) {		
+			if (altura < nivel) {
+				altura = nivel;
+			}
+			getHeight(n.getIzquierdo(), nivel+1);
+			getHeight(n.getDerecho(), nivel+1);			
+		}		
+	}
+	
 }

@@ -73,7 +73,6 @@ public class Lista implements Iterable<Integer> {
 		}
 		this.last = tmp;
 		size++;
-
 	}
 
 	public Iterator<Integer> iterator() {
