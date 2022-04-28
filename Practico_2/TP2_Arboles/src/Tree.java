@@ -6,30 +6,23 @@ import java.util.List;
 //   boolean isEmpty(), O(1) 
 //   void insert(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
 //   boolean delete(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
-//   --int getHeight(), 
+//   int getHeight(), 
 //   void printPosOrder(), 
 //   void printPreOrder(), 
 //   void printInOrder(), 
-//   --List getLongestBranch(), 
+//   List getLongestBranch(), 
 //   List getFrontera(), 
 //   Integer getMaxElem(), 
-//   --List getElemAtLevel(int)
+//   List getElemAtLevel(int)
 
 //1. ¿Cuál es la complejidad de cada uno de estos métodos?
 
 public class Tree {
 	
 	private Nodo raiz;
-	private int auxContador;
-	private int altura;
 	
 	public Tree() {
 		this.raiz = null;
-	}
-	
-	//Arbol vacio
-	public boolean isEmpty() {
-		return this.raiz == null;
 	}
 	
 	//Consultar la raiz del arbol
@@ -43,6 +36,10 @@ public class Tree {
 	
 	private Integer getRootTree(){
 		return this.raiz.getValor();
+	}
+	
+	private boolean isHoja(Nodo n) {
+		return n!=null && n.getIzquierdo() == null && n.getDerecho() == null;
 	}
 
 	//Cnsulta si existe un elemento en el arbol
@@ -64,6 +61,11 @@ public class Tree {
 			}	
 		}
 				
+	}
+	
+	//Arbol vacio
+	public boolean isEmpty() {
+		return this.raiz == null;
 	}
 	
 	//Inserta un elemento en el arbol
@@ -117,7 +119,7 @@ public class Tree {
 			if (valor < nodo.getValor()) { //Va por izquierda
 				return delete(nodo, nodo.getIzquierdo(), valor);
 			}else {
-				if (this.esHoja(nodo)) {
+				if (this.isHoja(nodo)) {
 					// es hoja
 					return this.deleteHoja(padre, valor);					
 				}else {
@@ -183,7 +185,7 @@ public class Tree {
 		if (raiz == null) {
 			return false;
 		}		
-		if (this.esHoja(raiz)) {
+		if (this.isHoja(raiz)) {
 			this.raiz = null;
 		}
 		if (raiz.getIzquierdo() == null && raiz.getDerecho() != null) {
@@ -201,7 +203,7 @@ public class Tree {
 		}
 		return false;
 	}
-
+	
 	//Mayor elemento del arbol
 	public Integer getMaxElem() {
 		return getMaxElem(this.raiz);
@@ -295,82 +297,112 @@ public class Tree {
 	    }
 	}
 	
-	//Saber el tamanio del arbol sin usar una variable de clase
-	public int sizee() {
-		return sizee(this.raiz);
+	public int size() {
+		return size(this.raiz);
 	}
 	
-	private int sizee (Nodo n) {
-		if (n != null) {
-			return 1 + sizee(n.getIzquierdo()) + sizee(n.getDerecho()) ;
-		}else {
+	private int size (Nodo n) {
+		if (n == null) {
 			return 0;
 		}
-	}
-
-	//Saber el tamanio del arbol sin usando variable de clase auxContador
-	public int size() {
-		setAuxContador(0);
-		size(this.raiz);
-		return getAuxContador();
-	}
-	
-	private void size (Nodo n) {
-		if (n != null) {
-			aumentarAuxiliarContador();
-			size(n.getIzquierdo());
-			size(n.getDerecho());
+		if (this.isHoja(n)) {
+			return 1;
+		}else {
+			return 1 + size(n.getIzquierdo()) + size(n.getDerecho()) ;
 		}
-	}
-	
-	private void aumentarAuxiliarContador() {
-		this.auxContador++;		
-	}
-
-	public int getAuxContador() {
-		return auxContador;
-	}
-
-	public void setAuxContador(int auxContador) {
-		this.auxContador = auxContador;
 	}
 	
 	public List<Integer> getFrontera(){
-		ArrayList<Integer> aux = new ArrayList<Integer>();
-		return getFrontera(aux,this.raiz);
+		return getFrontera(this.raiz);
 	} 
 	
-	private List<Integer> getFrontera(ArrayList<Integer> aux, Nodo n){
-		if (n == null) {
-			return aux;
-		}
-		if (esHoja(n)) {
-			aux.add(n.getValor());
-		}else {
-			getFrontera(aux,n.getIzquierdo());
-			getFrontera(aux,n.getDerecho());
+	private List<Integer> getFrontera(Nodo n){
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		if (n != null) {
+			if (isHoja(n)) {
+				aux.add(n.getValor());
+			}else {
+				aux.addAll(getFrontera(n.getIzquierdo()));
+				aux.addAll(getFrontera(n.getDerecho()));
+			}
 		}
 		return aux;
 	}
 
-	private boolean esHoja(Nodo n) {
-		return n!=null && n.getIzquierdo() == null && n.getDerecho() == null;
-	}
-
 	public int getHeight() {
-		altura = 0;
-		getHeight(this.raiz,altura);
-		return altura;
+		return getHeight(this.raiz);
 	} 
 	
-	private void getHeight(Nodo n ,int nivel) {
-		if (n != null) {		
-			if (altura < nivel) {
-				altura = nivel;
+	private int getHeight(Nodo n) {
+		if (isHoja(n)) {
+			return 0;
+		}else {
+			int alturaIzq = 0;
+			int alturaDer = 0;
+			if (n.getIzquierdo() != null && n.getDerecho() == null) {
+				alturaIzq = 1 + getHeight(n.getIzquierdo());
+			}else {	
+				if (n.getIzquierdo() == null && n.getDerecho() != null) {
+					alturaDer = 1 + getHeight(n.getDerecho());
+				}else {
+					if (n.getIzquierdo() != null && n.getDerecho() != null) {
+						alturaIzq = 1 + getHeight(n.getIzquierdo());
+						alturaDer = 1 + getHeight(n.getDerecho());						
+					}	
+				}
 			}
-			getHeight(n.getIzquierdo(), nivel+1);
-			getHeight(n.getDerecho(), nivel+1);			
+			return alturaIzq > alturaDer ? alturaIzq : alturaDer;
 		}		
+	
 	}
 	
+	public List<Integer> getElemAtLevel(int nivel) {
+		return getElemAtLevel(this.raiz,0, nivel);
+	}
+	
+	private List<Integer> getElemAtLevel(Nodo n, int nivelActual, int nivel){
+		ArrayList<Integer> aux = new ArrayList<Integer>();
+		if (n != null) {
+			if (nivelActual == nivel) {
+				aux.add(n.getValor());			
+			}else {
+				aux.addAll(getElemAtLevel(n.getIzquierdo(),nivelActual+1,nivel));
+				aux.addAll(getElemAtLevel(n.getDerecho(),nivelActual+1,nivel));
+			}		
+		}
+		return aux;
+	}
+	
+	
+	public List<Integer> getLongestBranch() {
+		return getLongestBranch(this.raiz);
+	}
+	
+	private List<Integer> getLongestBranch(Nodo n) {
+		ArrayList<Integer> auxI = new ArrayList<Integer>();
+		ArrayList<Integer> auxD = new ArrayList<Integer>();
+		if (isHoja(n)) {
+			auxI.add(n.getValor());
+			auxD.add(n.getValor());
+		}else {
+			if (n.getIzquierdo() != null && n.getDerecho() == null) {
+				auxI.add(n.getValor());
+				auxI.addAll(getLongestBranch(n.getIzquierdo()));				
+			}else {	
+				if (n.getIzquierdo() == null && n.getDerecho() != null) {
+					auxD.add(n.getValor());
+					auxD.addAll(getLongestBranch(n.getDerecho()));
+				}else {
+					if (n.getIzquierdo() != null && n.getDerecho() != null) {
+						auxI.add(n.getValor());
+						auxD.add(n.getValor());
+						auxI.addAll(getLongestBranch(n.getIzquierdo()));
+						auxD.addAll(getLongestBranch(n.getDerecho()));						
+					}	
+				}
+			}			
+		}
+		return auxI.size() > auxD.size() ? auxI : auxD;
+		
+	}
 }

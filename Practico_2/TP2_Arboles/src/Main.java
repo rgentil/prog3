@@ -7,21 +7,20 @@ public class Main {
 		
 		System.out.println("--------->>La raiz es " + tree.getRoot() );
 		System.out.println("--------->>Cantidad de elementos en el arbol " + tree.size() );
-		System.out.println("--------->>Cantidad de elementos en el arbol " + tree.sizee() );
 		
-		int valor_buscar = 70;
+		int valor_buscar = 50;
 		if (tree.hasElem(valor_buscar)) {
 			System.out.println("--------->>Se encuentra el elemento " + valor_buscar + " =)  " );
 		}else{
 			System.out.println("--------->>No esta el " + valor_buscar + " =(  " );
 		}
 		
-		/*
-		for(int i = 0; i <9; i++) {
-			int randomValue = (int) (Math.random()*1000);
-			tree.insert(randomValue);
+		
+		for(int i = 0; i <50; i++) {
+			int randomValue = (int) (Math.random()*100);
+			tree.insert(randomValue);//No entra valores duplicados. Porque va por la rama si es mayor o menor. Nunca se analiza el igual
 		}
-		*/
+		
 		//System.out.println("--------->>CARGA = 6 - 3 - 1 - 5 - 4 - 7 - 9" );
 		/*
 		tree.insert(6);
@@ -32,7 +31,7 @@ public class Main {
 		tree.insert(7);
 		tree.insert(9);		
 		*/
-		
+		/*
 		tree.insert(50);
 		tree.insert(40);
 		tree.insert(80);
@@ -46,7 +45,7 @@ public class Main {
 		tree.insert(60);
 		tree.insert(75);
 		tree.insert(65);
-		
+		*/
 
 		System.out.println(">>>>>>>>>>>>>>>>>>>> PRE ORDEN <<<<<<<<<<<<<<<<<<<");
 		tree.printPreOrder();
@@ -59,39 +58,32 @@ public class Main {
 		
 		System.out.println("--------->>La raiz es " + tree.getRoot() );
 		
-		if (tree.hasElem(valor_buscar)) {
-			System.out.println("--------->>Se encuentra el elemento " + valor_buscar + " =)  " );
-		}else{
-			System.out.println("--------->>No esta el " + valor_buscar + " =(  " );
-		}
-		
-		/*int valor_eliminar = 7;
-		if (tree.delete(valor_eliminar)) {
-			System.out.println("--------->>Se elimino el " + valor_eliminar + " =) " );
-		}else{
-			System.out.println("--------->>No se pudo eliminar " + valor_eliminar + " =( " );
-		}*/
-		
 		System.out.println("--------->>Maximo elemento del arbol " + tree.getMaxElem() );
 		
 		System.out.println("--------->>Minimo elemento del arbol " + tree.getMinElem() );
 		
 		System.out.println("--------->>Cantidad de elementos en el arbol " + tree.size() );
 		
-		System.out.println("--------->>Cantidad de elementos en el arbol " + tree.sizee() );
-		
 		System.out.println("--------->>Frontera " + tree.getFrontera() );
 		
-		System.out.println("--------->>Altura " + tree.getHeight() );
+		System.out.println("--------->>Altura = " + tree.getHeight() );
 		
-		/*System.out.println("           6  ");
-		System.out.println("         /   \\ ");
-		System.out.println("      3        7");
-		System.out.println("    /   \\     / \\ ");
-		System.out.println("  1      5         9");
-		System.out.println(" / \\   / \\       / \\");
-		System.out.println("       4   ");
-		System.out.println("      / \\ ");*/
+		System.out.println("--------->>Elementos en Nivel 0 " + tree.getElemAtLevel(0) );
+		System.out.println("--------->>Elementos en Nivel 1 " + tree.getElemAtLevel(1) );
+		System.out.println("--------->>Elementos en Nivel 2 " + tree.getElemAtLevel(2) );
+		System.out.println("--------->>Elementos en Nivel 3 " + tree.getElemAtLevel(3) );
+		System.out.println("--------->>Elementos en Nivel 4 " + tree.getElemAtLevel(4) );
+		System.out.println("--------->>Elementos en Nivel 5 " + tree.getElemAtLevel(5) );
+		
+		
+		System.out.println("--------->>Rama mas larga  " + tree.getLongestBranch() );
+		
+		
+		if (tree.hasElem(valor_buscar)) {
+			System.out.println("--------->>Se encuentra el elemento " + valor_buscar + " =)  y se va a eliminar" );
+		}else{
+			System.out.println("--------->>No esta el " + valor_buscar + " =(  " );
+		}
 		
 		System.out.println(">>>>>>>>>>>>>>>>>>>> EN ORDEN <<<<<<<<<<<<<<<<<<<<");
 		tree.printInOrder();
