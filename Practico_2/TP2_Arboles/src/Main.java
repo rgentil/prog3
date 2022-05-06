@@ -8,7 +8,7 @@ public class Main {
 		System.out.println("--------->>La raiz es " + tree.getRoot() );
 		System.out.println("--------->>Cantidad de elementos en el arbol " + tree.size() );
 		
-		int valor_buscar = 50;
+		int valor_buscar = 33;
 		if (tree.hasElem(valor_buscar)) {
 			System.out.println("--------->>Se encuentra el elemento " + valor_buscar + " =)  " );
 		}else{
@@ -75,6 +75,12 @@ public class Main {
 		System.out.println("--------->>Elementos en Nivel 4 " + tree.getElemAtLevel(4) );
 		System.out.println("--------->>Elementos en Nivel 5 " + tree.getElemAtLevel(5) );
 		
+		System.out.println("--------->>Elementos en Nivel 6 " + tree.getElemAtLevel(6) );
+		System.out.println("--------->>Elementos en Nivel 7 " + tree.getElemAtLevel(7) );
+		System.out.println("--------->>Elementos en Nivel 8 " + tree.getElemAtLevel(8) );
+		System.out.println("--------->>Elementos en Nivel 9 " + tree.getElemAtLevel(9) );
+		System.out.println("--------->>Elementos en Nivel 10 " + tree.getElemAtLevel(10) );
+		System.out.println("--------->>Elementos en Nivel 11 " + tree.getElemAtLevel(11) );
 		
 		System.out.println("--------->>Rama mas larga  " + tree.getLongestBranch() );
 		
@@ -87,7 +93,7 @@ public class Main {
 		
 		System.out.println(">>>>>>>>>>>>>>>>>>>> EN ORDEN <<<<<<<<<<<<<<<<<<<<");
 		tree.printInOrder();
-		tree.delete(50);
+		tree.delete(0);
 		
 		System.out.println(">>>>>>>>>>>>>>>>>>>> EN ORDEN <<<<<<<<<<<<<<<<<<<<");
 		tree.printInOrder();

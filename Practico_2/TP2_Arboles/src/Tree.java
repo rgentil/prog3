@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //   Integer getRoot(), O(1)
-//   boolean hasElem(Integer), O (nlog n) 
+//   boolean hasElem(Integer), O (nlog n) si es un arbol balanceado
 //   boolean isEmpty(), O(1) 
 //   void insert(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
 //   boolean delete(Integer), Caso promedio O(Log N) Peor de los casos O(h) h altura
@@ -102,7 +102,7 @@ public class Tree {
 	public boolean delete(Integer valor) {
 		if (!this.isEmpty()) {
 			if (this.raiz.getValor() == valor) {//Si lo que voy a eliminar es la raiz
-				return this.delete(this.raiz,valor);
+				return this.delete(this.raiz);
 			}
 			return this.delete(this.raiz,this.raiz, valor);//Si no es la raiz paso un padre y el nodo
 		}
@@ -181,13 +181,7 @@ public class Tree {
 		return false;
 	}
 
-	private boolean delete(Nodo raiz, Integer valor) {
-		if (raiz == null) {
-			return false;
-		}		
-		if (this.isHoja(raiz)) {
-			this.raiz = null;
-		}
+	private boolean delete(Nodo raiz) {	
 		if (raiz.getIzquierdo() == null && raiz.getDerecho() != null) {
 			this.raiz = raiz.getDerecho();
 		}
