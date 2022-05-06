@@ -1,5 +1,3 @@
-package ProgramacionIII.tp3;
-
 import java.util.Iterator;
 
 public class GrafoDirigido<T> implements Grafo<T> {
