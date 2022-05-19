@@ -9,6 +9,11 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	private HashMap<Integer,ArrayList<Arco<T>>> vertices ;
 	private Integer total_arcos;
 	
+	public GrafoDirigido(){ 
+		this.vertices=new HashMap<Integer,ArrayList<Arco<T>>>();
+		this.total_arcos=0;
+	}
+	
 	@Override
 	public void agregarVertice(int verticeId) {//O(1)
 		if(!this.contieneVertice(verticeId)) {
