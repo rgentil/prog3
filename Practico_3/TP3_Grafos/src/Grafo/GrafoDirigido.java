@@ -1,3 +1,4 @@
+package Grafo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -25,7 +26,6 @@ public class GrafoDirigido<T> implements Grafo<T> {
 			}
 			vertices.remove(verticeId);
 		}
-
 	}
 
 	@Override
