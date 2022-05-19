@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /*
  * La clase arco representa un arco del grafo. Contiene un vertice origen, un vertice destino y una etiqueta.
  * Nota: Para poder exponer los arcos fuera del grafo y que nadie los modifique se hizo esta clase inmutable
@@ -26,5 +28,19 @@ public class Arco<T> {
 	public T getEtiqueta() {
 		return etiqueta;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arco<T> arco = (Arco<T>) obj;
+		return arco.getVerticeDestino() == this.verticeDestino && arco.getVerticeOrigen() == this.getVerticeOrigen();
+	}
+	
+	
 
 }
