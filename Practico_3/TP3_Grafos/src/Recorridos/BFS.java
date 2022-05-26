@@ -23,6 +23,7 @@ public class BFS {
 		}
 	}
 	
+	//O(|V|+|A|). Va a pasar una vez por cada vertice y una vez por cada arco.
 	public ArrayList<Integer> bfs_recorrido(){
 		this.iniciarEstructura();
 		ArrayList<Integer> resultado = new ArrayList<Integer>();	
@@ -54,5 +55,48 @@ public class BFS {
 		}
 		return salida;
 	}
+	
+	public ArrayList<Integer> encontrarCaminoCorto(int origen, int destino){
+		this.iniciarEstructura();
+		return encontrarCaminoCortoRecorrido(origen, destino);
+	}
+
+	private ArrayList<Integer> encontrarCaminoCortoRecorrido(int origen, int destino) {
+		ArrayList<Integer> fila = new ArrayList<>();
+		HashMap<Integer,Integer> padres = new HashMap<>();
+		visitados.put(origen, true);
+		fila.add(origen);
+		boolean llegue = false;
+		while(!fila.isEmpty() && !llegue) {
+			int vertice = fila.remove(0); // Tomamos vértice de la fila,
+			Iterator<Integer> adyacentes = this.grafo.obtenerAdyacentes(vertice);
+			while (adyacentes.hasNext() && !llegue) {
+				int adyacente = adyacentes.next(); // Para cada vértice adyacente:
+				if (!this.visitados.get(adyacente)) { // Si y es NO_VISITADO 
+					this.visitados.put(adyacente, true); // Marcar el adyacente como VISITADO.
+					fila.add(adyacente); // Agregar adyacente a la fila F.
+					padres.put(adyacente, vertice);
+					if (adyacente == destino) {
+						llegue = true;
+					}
+				}				
+			}
+		}
+		
+		if (llegue) {
+			ArrayList<Integer> salida = new ArrayList<>();
+			Integer aux = destino;
+			while( aux != null) {
+				salida.add(0,aux);
+				aux = padres.get(aux);
+			}
+			return salida;
+		}
+		else {
+			return null;			
+		}
+	}
+	
+	
 	
 }
