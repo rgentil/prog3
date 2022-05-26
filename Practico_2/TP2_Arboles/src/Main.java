@@ -93,7 +93,7 @@ public class Main {
 		
 		System.out.println(">>>>>>>>>>>>>>>>>>>> EN ORDEN <<<<<<<<<<<<<<<<<<<<");
 		tree.printInOrder();
-		tree.delete(0);
+		tree.delete(33);
 		
 		System.out.println(">>>>>>>>>>>>>>>>>>>> EN ORDEN <<<<<<<<<<<<<<<<<<<<");
 		tree.printInOrder();
