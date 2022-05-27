@@ -27,7 +27,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 			for (Iterator<Arco<T>> iterator = vertices.get(verticeId).iterator(); iterator.hasNext();) {
 				Arco<T> arco = (Arco<T>) iterator.next();
 				this.borrarArco(verticeId, arco.getVerticeDestino());
-				this.borrarArco(arco.getVerticeDestino(), verticeId);
+				//this.borrarArco(arco.getVerticeDestino(), verticeId);
+				this.borrarArcosDesdeAdyacente(verticeId);
 			}
 			vertices.remove(verticeId);
 		}
@@ -53,6 +54,14 @@ public class GrafoDirigido<T> implements Grafo<T> {
 				}			
 			}
 		}
+	}
+	
+	private void borrarArcosDesdeAdyacente(int verticeAdyacente) {//O(V) donde v son todos los vertices.
+		for (Iterator<Integer> iterator = vertices.keySet().iterator(); iterator.hasNext();) {
+			Integer vertice = (Integer) iterator.next();
+			borrarArco(vertice, verticeAdyacente);					
+		}
+		
 	}
 
 	@Override
