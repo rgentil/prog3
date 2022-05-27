@@ -28,8 +28,8 @@ public class GrafoDirigido<T> implements Grafo<T> {
 				Arco<T> arco = (Arco<T>) iterator.next();
 				this.borrarArco(verticeId, arco.getVerticeDestino());
 				//this.borrarArco(arco.getVerticeDestino(), verticeId);
-				this.borrarArcosDesdeAdyacente(verticeId);
 			}
+			this.borrarArcosDesdeAdyacente(verticeId);
 			vertices.remove(verticeId);
 		}
 	}
